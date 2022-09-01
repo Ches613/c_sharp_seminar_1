@@ -9,7 +9,7 @@ int outputNumber = 2;
 List<int> outputNumbers = new List<int>();
 
 Console.WriteLine("Enter '" + ExitCommand + "' for exit from program.");
-int number = RequestNumber();
+int number = RequestNumber(exitCmd: ExitCommand);
 
 while (outputNumber <= number) // пока outputNumber <= числа введенного пользователем наполняем список четными числами.
 {
@@ -20,7 +20,7 @@ while (outputNumber <= number) // пока outputNumber <= числа введе
 Console.WriteLine("\n" + string.Join(", ", outputNumbers)); // превращаем элементы списка в строку с запятой в качестве разделителя и выводим в консоль
 
 
-// запрашивает число у пользователь, в качестве аргумента принимает текст запроса и команду выхода.
+// запрашивает число у пользователь, в качестве аргумента принимает текст запроса и команду выхода из программы.
 int RequestNumber(string text = "Enter number", string exitCmd = "q")
 {
 
