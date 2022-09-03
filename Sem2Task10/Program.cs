@@ -11,7 +11,7 @@ int RequestNumber(string text = "Enter number", int size = 0, string exitCmd = "
     while (true)
     {
         Console.Write($"{text} или '{exitCmd}' для выхода из программы: ");
-        string? inputLine = Console.ReadLine();
+        string inputLine = Console.ReadLine() ?? "0";
 
         // выход из программы
         if (inputLine.ToLower() == exitCmd)
