@@ -34,7 +34,7 @@ int CountEvenNumbers(int[] array)
 // сортировка методом пузырька
 void BubbleSort(int[] array)
 {
-    int temp; 
+    int temp;
     for (int i = 0; i < array.Length - 1; i++)
     {
         for (int j = 0; j < array.Length - 1; j++)
@@ -50,9 +50,9 @@ void BubbleSort(int[] array)
 }
 
 // вывод массив
-void Print1DArray(int[] array)
+void Print1DArray(int[] array, string title = "")
 {
-    Console.WriteLine("[{0}]", string.Join(", ", array));
+    Console.WriteLine("[{0} -> {1}]", title, string.Join(", ", array));
 }
 
 // вывод ответа
@@ -69,4 +69,4 @@ int[] array = FillThreeDigitArray(10);
 Print1DArray(array);
 PrintAnswer(CountEvenNumbers(array));
 BubbleSort(array);
-Print1DArray(array);
+Print1DArray(array, "Сортированный массив методом пузырька");
