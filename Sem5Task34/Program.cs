@@ -20,7 +20,7 @@ int[] FillThreeDigitArray(int length)
 }
 
 
-// подсчитывает количество трёхзначныx чисел в массиве
+// подсчитывает количество чётных чисел в массиве
 int CountEvenNumbers(int[] array)
 {
     int count = 0;
