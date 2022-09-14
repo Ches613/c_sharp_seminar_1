@@ -126,7 +126,7 @@ void MainTask()
     double[] arrayOfDouble = FillArrayOfDoubleNumbers(10);
 
     Print1DArrayOfDouble(arrayOfDouble, "Исходный массив вещественныx чисел");
-    
+
     PrintAnswer(DiffOfMinMax(arrayOfDouble).ToString(), 
                 "Разница между максимальным и минимальным значениями массива");
 }
@@ -186,6 +186,6 @@ void speedTest(int arrayLength, int maxValue, bool printArrays = false)
 Console.Clear();
 MainTask();
 speedTest(10, 100, true);
-speedTest(100000, 1000);
-speedTest(100000, Int32.MaxValue / 2);
-speedTest(10000, Int32.MaxValue / 2);
+// speedTest(100000, 1000);
+// speedTest(100000, Int32.MaxValue / 2);
+// speedTest(10000, Int32.MaxValue / 2);
