@@ -52,7 +52,7 @@ void BubbleSort(int[] array)
 // вывод массив
 void Print1DArray(int[] array, string title = "")
 {
-    Console.WriteLine("[{0} -> {1}]", title, string.Join(", ", array));
+    Console.WriteLine("{0} -> [{1}]", title, string.Join(", ", array));
 }
 
 // вывод ответа
