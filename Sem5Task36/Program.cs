@@ -22,9 +22,9 @@ int[] FillArray(int length, int topBorder, int downBorder)
 int SumOfOddPositions(int[] array)
 {
     int sum = 0;
-    for (int i = 0; i < array.Length; i++)
+    for (int i = 0; i < array.Length; i += 2)
     {
-        if ((i + 1) % 2 != 0) sum += array[i];
+        sum += array[i];
     }
     return sum;
 }
@@ -33,14 +33,14 @@ int SumOfOddPositions(int[] array)
 List<(int Number, int FirstIndex, int SecondIndex)> FindPairsOfNumbers(int[] array)
 {
     // список кртежей пар чисел с положением в массиве
-    List<(int Number, int FirstIndex, int SecondIndex)> 
+    List<(int Number, int FirstIndex, int SecondIndex)>
     pairs = new List<(int Number, int FirstIndex, int SecondIndex)>();
 
     // для каждого числа в массиве
     for (int i = 0; i < array.Length - 1; i++)
     {
         //все числа начиная со следующего после проверяемого
-        for (int j = i + 1; j < array.Length; j++) 
+        for (int j = i + 1; j < array.Length; j++)
         {
             if (array[i] == array[j]) // проверяем на парность
             {
@@ -71,7 +71,7 @@ void PrintListOfPairs(List<(int Number, int FirstIndex, int SecondIndex)> pairs)
 {
     Console.WriteLine("\nПары чисел в массиве в формате (число -> первый индекс в массиве, второй индекс):");
     pairs.Sort(); // сортируем для удобства
-    
+
     // выводим значения в цикле
     foreach (var pair in pairs)
     {
