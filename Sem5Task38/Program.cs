@@ -100,6 +100,30 @@ long CountingSort(int[] array, int maxValue)
     return count;
 }
 
+// метод сортировки выбором из лекции
+long SelectionSort(int[] array)
+{
+    long count = 0;
+    for (int i = 0; i < array.Length - 1; i++)
+    {
+        int minPosition = i;
+
+        for (int j = i + 1; j < array.Length; j++)
+        {
+
+            if (array[j] < array[minPosition])
+            {
+                minPosition = j;
+                count++;
+            }
+        }
+        count++;
+        int temp = array[i];
+        array[i] = array[minPosition];
+        array[minPosition] = temp;
+    }
+    return count;
+}
 
 // вывод ответа
 void PrintAnswer(string answer, string title = "")
@@ -127,50 +151,68 @@ void MainTask()
 
     Print1DArrayOfDouble(arrayOfDouble, "Исходный массив вещественныx чисел");
 
-    PrintAnswer(DiffOfMinMax(arrayOfDouble).ToString(), 
+    PrintAnswer(DiffOfMinMax(arrayOfDouble).ToString(),
                 "Разница между максимальным и минимальным значениями массива");
 }
 
 // задание метод сортировки вставками
 void InsertionSortTask(int[] array, bool printSorted = false)
 {
-    Console.WriteLine("------------- Сортировка вставками ------------- ");
-    TimeSpan InsertionSortTime;
+    TimeSpan deltaTime;
 
     DateTime dtStart = DateTime.Now;
     long InsertionSortCount = InsertionSort(array);
-    InsertionSortTime = DateTime.Now - dtStart;
+    deltaTime = DateTime.Now - dtStart;
 
+    Console.WriteLine("------------- Сортировка вставками ------------- ");
     if (printSorted)
         Print1DArray(array, "Отсортированный вставками массив целых чисел");
 
-    PrintAnswer(InsertionSortCount.ToString(), "Количество итераций цикла");
-    PrintAnswer(InsertionSortTime.ToString(), "Время выполнения сортировки вставками");
+    PrintAnswer(InsertionSortCount.ToString(), "Количество итераций цикла вставками");
+    PrintAnswer(deltaTime.ToString(), "Время выполнения сортировки вставками");
 }
 
 // задание метод сортировки подсчетом
 void CountingSortTask(int[] array, int maxValueOfNumber, bool printSorted = false)
 {
-    Console.WriteLine("------------- Сортировка подсчетом ------------- ");
-    TimeSpan CountingSortTime;
+    TimeSpan deltaTime;
 
     DateTime dtStart = DateTime.Now;
     long CountingSortCount = CountingSort(array, maxValueOfNumber);
-    CountingSortTime = DateTime.Now - dtStart;
+    deltaTime = DateTime.Now - dtStart;
 
+    Console.WriteLine("------------- Сортировка подсчетом ------------- ");
     if (printSorted)
         Print1DArray(array, "Отсортированный методом подсчета массив целых чисел");
 
     PrintAnswer(CountingSortCount.ToString(), "Количество итераций цикла ");
-    PrintAnswer(CountingSortTime.ToString(), "Время выполнения сортировки методом подсчета");
+    PrintAnswer(deltaTime.ToString(), "Время выполнения сортировки методом подсчета");
+}
+
+// задание метод сортировки выбором из лекции
+void SelectionSortTask(int[] array, bool printSorted = false)
+{
+    TimeSpan deltaTime;
+
+    DateTime dtStart = DateTime.Now;
+    long CountingSortCount = SelectionSort(array);
+    deltaTime = DateTime.Now - dtStart;
+
+    Console.WriteLine("------------- Сортировка выбором ------------- ");
+    if (printSorted)
+        Print1DArray(array, "Отсортированный методом выбора массив целых чисел");
+
+    PrintAnswer(CountingSortCount.ToString(), "Количество итераций цикла выбором");
+    PrintAnswer(deltaTime.ToString(), "Время выполнения сортировки методом выбора");
 }
 
 // тест скорости
-void speedTest(int arrayLength, int maxValue, bool printArrays = false)
+void SpeedTest(int arrayLength, int maxValue, bool printArrays = false)
 {
     Console.WriteLine("\n================= ТЕСТ СКОРОСТИ ================= ");
     int[] array = FillArray(arrayLength, 0, maxValue);
     int[] arrayClone = (int[])array.Clone();
+    int[] arrayClone2 = (int[])array.Clone();
 
     if (printArrays)
         Print1DArray(array, "\nИсходный массив");
@@ -178,14 +220,18 @@ void speedTest(int arrayLength, int maxValue, bool printArrays = false)
     Console.WriteLine($"число элементов  -> {arrayLength}");
     Console.WriteLine($"максимальное значение -> {maxValue}");
 
-    CountingSortTask(array, maxValue, printArrays);
-    InsertionSortTask(arrayClone, printArrays);
+    new Thread(() => CountingSortTask(array, maxValue, printArrays)).Start();
+    new Thread(() => InsertionSortTask(arrayClone, printArrays)).Start();
+    new Thread(() => SelectionSortTask(arrayClone2, printArrays)).Start();
+// SelectionSortTask(arrayClone2);
+// InsertionSortTask(arrayClone, printArrays);
+// CountingSortTask(array, maxValue, printArrays);
 }
 
 
 Console.Clear();
 MainTask();
-speedTest(10, 100, true);
-// speedTest(100000, 1000);
-// speedTest(100000, Int32.MaxValue / 2);
-// speedTest(10000, Int32.MaxValue / 2);
+// SpeedTest(10, 100, true);
+SpeedTest(100000, 1000);
+// SpeedTest(100000, Int32.MaxValue / 2);
+// SpeedTest(10000, Int32.MaxValue / 2);
