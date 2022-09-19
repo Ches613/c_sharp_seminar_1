@@ -1,9 +1,9 @@
 namespace Values
 {
     // структура для хранения и передачи значений
-    public struct LinesValue
+    public struct LineValues
     {
-        public LinesValue(double b1, double k1, double b2, double k2)
+        public LineValues(double b1, double k1, double b2, double k2)
         {
             B1 = b1;
             K1 = k1;
@@ -21,9 +21,9 @@ namespace Values
 
 
     // структура для хранения координат точки пересечения
-    public struct PointCoord
+    public struct PointCoordinates
     {
-        public PointCoord(double x, double y)
+        public PointCoordinates(double x, double y)
         {
             X = x;
             Y = y;

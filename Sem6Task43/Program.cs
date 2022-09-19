@@ -6,12 +6,14 @@
 // * Найдите площадь треугольника образованного пересечением 3 прямых.
 // ====================================================================
 using Values;
+using Utils;
 
 
 // чтение данных из сонсоли, возвращает
 // Определение <число А, число В, знак операции>
-LinesValue ReadData(string line)
+LineValues ReadData(string line)
 {
+    Console.Clear();
     //Выводим сообщение 
     Console.WriteLine("{0}: ", line);
     string inputLine = Console.ReadLine() ?? "";
@@ -19,22 +21,22 @@ LinesValue ReadData(string line)
     // парсим полученную строку
     string[] inputLineItems = inputLine.Split(",");
 
-    return new LinesValue(
-            b1: double.Parse(inputLineItems[0]),
-            k1: double.Parse(inputLineItems[1]),
-            b2: double.Parse(inputLineItems[2]),
-            k2: double.Parse(inputLineItems[3])
+    return new LineValues(
+            k1: double.Parse(inputLineItems[0]),
+            b1: double.Parse(inputLineItems[1]),
+            k2: double.Parse(inputLineItems[2]),
+            b2: double.Parse(inputLineItems[3])
            );
 }
 
 
 // поиск пересечения двух прямых
-PointCoord FindPointOfTwoLines(LinesValue values)
+PointCoordinates FindCrossingOfTwoLines(LineValues values)
 {
     double pointCoordX = (values.B2 - values.B1) / (values.K1 - values.K2);
     double pointCoordY = values.K1 * pointCoordX + values.B1;
 
-    return new PointCoord(x: pointCoordX, y: pointCoordY);
+    return new PointCoordinates(x: pointCoordX, y: pointCoordY);
 }
 
 
@@ -45,8 +47,12 @@ void PrintAnswer(string answer, string title = "")
 }
 
 
-LinesValue linesVal = ReadData("Введите значения b1, k1, b2 и k2 через запятую");
-PointCoord pointCoord = FindPointOfTwoLines(linesVal);
+LineValues lineValues = ReadData("Введите значения k1, b1, k2 и b2 через запятую");
 
-PrintAnswer($"({pointCoord})",
-            $"Координаты точки пересечения двух прямых {linesVal}");
+new LinearFunctionPrinter(12)
+    .AddLinearFunction(lineValues.K1, lineValues.B1)
+    .AddLinearFunction(lineValues.K2, lineValues.B2)
+    .printChart();
+
+PrintAnswer($"({FindCrossingOfTwoLines(lineValues)})",
+            $"Координаты точки пересечения двух прямых {lineValues}");
