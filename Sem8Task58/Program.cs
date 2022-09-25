@@ -20,18 +20,6 @@ int[,] GenerateArray(int countRow, int countColumn,  int downBorder, int topBord
 }
 
 
-// возвращает сумму элементов строки
-int RowSum(int[,] array, int row)
-{
-    int sum = 0;
-    for (int i = 0; i < array.GetLength(1); i++)
-    {
-        sum += array[row, i];
-    }
-    return sum;
-}
-
-
 // находит произведение двух матриц
 static int[,] MatrixProduct(int[,] matrixA, int[,] matrixB)
 {
