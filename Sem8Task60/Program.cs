@@ -57,5 +57,11 @@ void Print3DArray(int[,,] array)
 int x = 2;
 int y = 2;
 int z = 2;
-int[] values = RandomUniqueValues(size: x * y * z, 10, 99);
+
+int[] values = RandomUniqueValues(
+    size: x * y * z, 
+    downBorder:10, 
+    topBorder: 99
+    );
+    
 Print3DArray(Generate3DArray(x, y, z, values));
