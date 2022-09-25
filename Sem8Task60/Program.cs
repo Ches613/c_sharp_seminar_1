@@ -4,10 +4,23 @@
 // добавляя индексы каждого элемента.
 // ====================================================================
 
+// вернет массив неповторяющихся случайных двузначных чисел
+int[] RandomUniqueValues(int size, int downBorder, int topBorder)
+{
+    HashSet<int> values = new HashSet<int>();
+    Random rand = new Random();
+    
+    while (values.Count < size)
+    {
+        values.Add(rand.Next(downBorder, topBorder + 1));
+    }
+    return values.ToArray<int>();
+}
 
 // Создает трехмерный массив размером x × y x z
-int[,,] Generate3DArray(int countX, int countY, int countZ, int downBorder, int topBorder)
+int[,,] Generate3DArray(int countX, int countY, int countZ, int[] values)
 {
+    int count = 0;
     Random rand = new Random();
     int[,,] array = new int[countX, countY, countZ];
     for (int x = 0; x < array.GetLength(0); x++)
@@ -16,7 +29,7 @@ int[,,] Generate3DArray(int countX, int countY, int countZ, int downBorder, int 
         {
             for (int z = 0; z < array.GetLength(2); z++)
             {
-                array[x, y, z] = rand.Next(downBorder, topBorder + 1);
+                array[x, y, z] = values[count++];
             }
         }
     }
@@ -41,5 +54,8 @@ void Print3DArray(int[,,] array)
     }
 }
 
-
-Print3DArray(Generate3DArray(2, 2, 2, 10, 99));
+int x = 2;
+int y = 2;
+int z = 2;
+int[] values = RandomUniqueValues(size: x * y * z, 10, 99);
+Print3DArray(Generate3DArray(x, y, z, values));
